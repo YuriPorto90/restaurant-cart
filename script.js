@@ -1,5 +1,5 @@
 function test(){
-    $.getJSON('itens.json', function(array){
+    $.getJSON('dados/Itens.json', function(array){
         const conteiner = document.getElementById('body');
         array.map((each)=>{
             conteiner.innerHTML+=`
