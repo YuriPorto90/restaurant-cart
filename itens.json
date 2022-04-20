@@ -1,0 +1,42 @@
+[
+  {
+    "descricao": "Marmita Pequena",
+    "valor": 15.99
+  },
+  {
+    "descricao": "Marmita Média",
+    "valor": 18.99
+  },
+  {
+    "descricao": "Marmita Grande",
+    "valor": 21.99
+  },
+  {
+    "descricao": "Porção de Cupim 500g",
+    "valor": 79.9
+  },
+  {
+    "descricao": "Porção de Fritas 500g",
+    "valor": 39.9
+  },
+  {
+    "descricao": "Porção de Wagyu 300g",
+    "valor": 219.9
+  },
+  {
+    "descricao": "Barca de comida japonesa",
+    "valor": 89.9
+  },
+  {
+    "descricao": "Burger Cheddar",
+    "valor": 24.99
+  },
+  {
+    "descricao": "Smash Simples",
+    "valor": 29.99
+  },
+  {
+    "descricao": "Smash Triplo",
+    "valor": 39.99
+  }
+]
