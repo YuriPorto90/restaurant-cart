@@ -1,4 +1,4 @@
-function test(){
+window.onload = function(){
     $.getJSON('dados/Itens.json', function(array){
         const conteiner = document.getElementById('body');
         array.map((each)=>{
