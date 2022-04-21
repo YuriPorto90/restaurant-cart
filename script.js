@@ -10,4 +10,16 @@ window.onload = function(){
         `;
         })
     });
+
+    const modal = document.getElementById('garcom-id');
+    modal.style.display = 'flex';
+    
+    $.getJSON('dados/Garcons.json', function(garcons){
+        const garconSelect = document.getElementById('garcom-list');
+        garcons.map((each)=>{
+            garconSelect.innerHTML+=`
+                <option value=`+each.id+`> `+each.nome+` </option>
+        `;
+        })
+    });
 }

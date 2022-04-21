@@ -6,11 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Churrascaria Dois Brothers</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="normalize.css">
     <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="script.js" defer></script>
 </head>
 <body>
-    <button onclick="test()">a</button>
+    <div id="garcom-id" class="modal">
+        <div id="modal-content">
+            <select id="garcom-list" class="garcom-select">
+                <option value="#" style="display: none;">Quem está utilizando?</option>
+            </select>
+            <br>
+            
+            <button onclick="getGarcomId()">Login</button>
+        </div>
+    </div>
     <div id="body">
 
     </div>

@@ -7,3 +7,25 @@
     font-weight: 100;
     padding-left: 3px;
 }
+
+.modal{
+    z-index: 10;
+    display: none;
+    position: fixed;    
+    backdrop-filter: blur(3px);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+#modal-content{
+    display: block;
+    background-color: #b3a1a2;
+    width: 30%;
+    border-radius: 20px;
+    padding: 1vw;
+    text-align: center;
+}
