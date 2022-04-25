@@ -1,3 +1,5 @@
+const modal = document.getElementById('garcom-id');
+
 window.onload = function(){
     $.getJSON('dados/Itens.json', function(array){
         const conteiner = document.getElementById('body');
@@ -11,7 +13,6 @@ window.onload = function(){
         })
     });
 
-    const modal = document.getElementById('garcom-id');
     modal.style.display = 'flex';
     
     $.getJSON('dados/Garcons.json', function(garcons){
@@ -23,3 +24,15 @@ window.onload = function(){
         })
     });
 }
+
+const selector = document.getElementById('garcom-list');
+selector.addEventListener('change', ()=>{
+    const loginButton = document.getElementById('login');
+    loginButton.disabled = false; 
+}) //ativa o botão ao selecionar alguém no modal de login
+function getGarcomId(){
+    let garcomAtual = selector.options[selector.selectedIndex].value;
+    modal.style.display = 'none';
+    console.log(garcomAtual)
+} //armazena o id do garçom selecionado ao logar
+
