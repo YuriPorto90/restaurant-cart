@@ -1,14 +1,22 @@
 const modal = document.getElementById('garcom-id');
+const conteiner = document.querySelector('main');
 
 window.onload = function(){
-    $.getJSON('dados/Itens.json', function(array){
-        const conteiner = document.getElementById('body');
-        array.map((each)=>{
+    $.getJSON('dados/Itens.json', function(itens){
+        const conteiner = document.querySelector('main');
+        itens.map((item)=>{
             conteiner.innerHTML+=`
-            <div class = "product-display">
-                <span> `+each.descricao+` </span>
-                <span> `+each.valor+` </span>
+            <div class="card">
+            <div class="card-img"></div>
+            <div class="card-info">
+              <p class="text-title"> `+item.nome+` </p>
             </div>
+            <div class="card-footer">
+            <span class="text-title"> R$`+item.valor+` </span>
+            <button class="card-button" onclick="buy(`+item.id+`, mesa, 1)">+</button>
+
+            <button class="card-button" onclick="buy(`+item.id+`, mesa, -1)">-</button>
+          </div>
         `;
         })
     });
@@ -29,10 +37,24 @@ const selector = document.getElementById('garcom-list');
 selector.addEventListener('change', ()=>{
     const loginButton = document.getElementById('login');
     loginButton.disabled = false; 
-}) //ativa o botão ao selecionar alguém no modal de login
+})
 function getGarcomId(){
-    let garcomAtual = selector.options[selector.selectedIndex].value;
-    modal.style.display = 'none';
-    console.log(garcomAtual)
-} //armazena o id do garçom selecionado ao logar
+    let mesas = document.getElementById('numero-mesas').value;
+    console.log(mesas);
+    if(mesas>0){
+        let garcomAtual = selector.options[selector.selectedIndex].value;
+        modal.style.display = 'none';
+        console.log(garcomAtual);
+    } else{
+        alert('O mínimo de mesas é 1!');
+    }
+}
 
+function cart(){
+    
+}
+
+function buy(produto, mesa, modificador){
+    quantidade[produto][mesa] += modificador;
+    console.log(quantidade[produto]);
+}
