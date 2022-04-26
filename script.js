@@ -3,7 +3,7 @@ const conteiner = document.querySelector('main');
 let pedidos = []; let i;
 
 window.onload = function(){
-    $.getJSON('dados/Itens.json', function(itens){
+    $.getJSON(api('Itens.json'), function(itens){
         itens.map((item)=>{
             conteiner.innerHTML+=`
             <div class="card">
@@ -29,7 +29,7 @@ window.onload = function(){
 
     modal.style.display = 'flex'; 
     
-    $.getJSON('dados/Garcons.json', function(garcons){
+    $.getJSON(api('Garcons.json'), function(garcons){
         const garconSelect = document.getElementById('garcom-list');
         garcons.map((garcom)=>{
             garconSelect.innerHTML+=`
@@ -39,6 +39,11 @@ window.onload = function(){
     });
 }
 
+function api(jsonFile) {
+
+    //Retorna o json através do Github, evitando conflitos com o CORS.
+    return 'https://raw.githubusercontent.com/YuriPorto90/restaurant-cart/main/dados/' + jsonFile;
+}
 
 const selector = document.getElementById('garcom-list');
 selector.addEventListener('change', ()=>{
@@ -78,7 +83,7 @@ function sendToCart(){
 } */
 
 function cartModal(){
-    $.getJSON('dados/Pedidos.json', function(pedidos){
+    $.getJSON(api('Itens.json'), function(pedidos){
         const cartModal = document.getElementById('cart-modal');
         pedidos.map((pedido)=>{
             cartModal.innerHTML+=`
