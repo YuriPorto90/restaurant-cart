@@ -38,6 +38,38 @@
   border: none;
 }
 
+/* CART */
+
+#cart-modal {
+  z-index: 10;
+  display: none;
+  position: fixed;
+  backdrop-filter: blur(3px);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.test{
+  background-color: transparent;
+  border: none;
+  color: black;
+}
+
+#cart-content {
+  display: block;
+  background-color: #8b3236;
+  width: 80%;
+  height: 80vh;
+  overflow-y: auto;
+  border-radius: 20px;
+  padding: 1vw;
+  text-align: center;
+}
+
 /* From uiverse.io by @cuatrofender */
 #modal-content > button {
   margin-top: 1vw;

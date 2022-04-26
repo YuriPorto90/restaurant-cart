@@ -48,5 +48,10 @@
     "id": 9,
     "nome": "Smash Triplo",
     "valor": 39.99
+  },
+  {
+    "id": 10,
+    "nome": "Smash Máximo",
+    "valor": 50.00
   }
 ]
