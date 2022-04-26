@@ -16,22 +16,22 @@
   },
   {
     "id": 3,
-    "nome": "Porção de Cupim 500g",
+    "nome": "Porção de Cupim (500g)",
     "valor": 79.90
   },
   {
     "id": 4,
-    "nome": "Porção de Fritas 500g",
+    "nome": "Porção de Fritas (500g)",
     "valor": 39.90
   },
   {
     "id": 5,
-    "nome": "Porção de Wagyu 300g",
+    "nome": "Porção de Wagyu (300g)",
     "valor": 21.99
   },
   {
     "id": 6,
-    "nome": "Barca de comida japonesa",
+    "nome": "Barca de sushi",
     "valor": 89.90
   },
   {

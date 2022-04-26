@@ -16,7 +16,6 @@
             <select id="garcom-list" class="garcom-select">
                 <option value="#" style="display: none;" required>Quem está utilizando? ▽</option>
             </select>
-            <br>
             <input id="numero-mesas" type="number" min="1">
             <button id="login" onclick="getGarcomId()" disabled>Login</button>
         </div>
@@ -24,14 +23,18 @@
 
     <head>
         <div id="head">
-            <button>Trocar de mesa</button>
-            <button>Carrinho</button>
-            <button>Logout</button>
+            <button onclick="mesaModal()">Trocar mesa</button>
+            <button onclick="cartModal()">Carrinho</button>
+            <button onclick="mesaModal()">Trocar usuário</button>
         </div>
     </head>
 
     <main>
 
     </main>
+
+    <button class="cssbuttons-io-button" onclick="sendToCart()">
+        <span>Finalizar pedido</span>
+    </button>
 </body>
 </html>
