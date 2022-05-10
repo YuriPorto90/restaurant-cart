@@ -3,7 +3,7 @@ const conteiner = document.querySelector('main');
 let pedidos = []; let i; let j;
 
 window.onload = function(){
-    $.getJSON(api('Itens.json'), function(itens){
+    $.getJSON(apiLocal('cardapio'), function(itens){
         itens.map((item)=>{
             conteiner.innerHTML+=`
             <div class="card">
@@ -21,6 +21,8 @@ window.onload = function(){
             `;
         });
 
+        console.log(apiLocal('cardapio'));
+
         quantidade = [];
         for (i = 0; i <itens.length; i++) {
             quantidade.push(0)
@@ -30,7 +32,7 @@ window.onload = function(){
 
     modal.style.display = 'flex'; 
 
-    $.getJSON(api('Garcons.json'), function(garcons){
+    $.getJSON(apiGitHub('Garcons.json'), function(garcons){
         const garconSelect = document.getElementById('garcom-list');
         garcons.map((garcom)=>{
             garconSelect.innerHTML+=`
@@ -40,9 +42,14 @@ window.onload = function(){
     });
 }
 
-function api(jsonFile) {
+function apiGitHub(jsonFile) {
     //Retorna o json através do Github, evitando conflitos com o CORS.
     return 'https://raw.githubusercontent.com/YuriPorto90/restaurant-cart/main/dados/' + jsonFile;
+}
+
+function apiLocal(rota = null) {
+    //Retorna o json através do servidor local que pega os dados do banco Mongo.
+    return 'localhost:3000/' + rota;
 }
 
 const selector = document.getElementById('garcom-list');
@@ -95,7 +102,7 @@ function cartModal(){
     const cartModal = document.getElementById('cart-modal');
     cartModal.style.display = 'flex';
     const cartConteiner = document.getElementById('cart-content');
-    $.getJSON(api('Itens.json'), function(itens){
+    $.getJSON(apiGitHub('Itens.json'), function(itens){
         for(i= 0; i<itens.length; i++){
             cartConteiner.innerHTML+=`
                 <p class="text-title"> `+itens[i].nome+` </p>
