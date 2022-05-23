@@ -28,7 +28,7 @@ window.onload = function(){
         totalItens = itens.length;
     });
 
-    modal.style.display = 'flex'; 
+    modal.style.display = 'flex';
 
     $.getJSON(api('Garcons.json'), function(garcons){
         const garconSelect = document.getElementById('garcom-list');
@@ -38,19 +38,18 @@ window.onload = function(){
             `;
         })
     });
-}
+} //Gera a tela de login
 
 function api(jsonFile) {
-    //Retorna o json através do Github, evitando conflitos com o CORS.
     return 'https://raw.githubusercontent.com/YuriPorto90/restaurant-cart/main/dados/' + jsonFile;
-}
+} //Retorna o json através do Github, evitando conflitos com o CORS.
 
 const selector = document.getElementById('garcom-list');
 selector.addEventListener('change', ()=>{
     const loginButton = document.getElementById('login');
     loginButton.disabled = false; 
-})
-function getGarcomId(){
+}) //Desbloqueia o botão de login quando algum perfil for escolhido
+function login(){
     let mesas = document.getElementById('numero-mesas').value;
     if(mesas>0){
         let garcomAtual = selector.options[selector.selectedIndex].value;
@@ -60,7 +59,7 @@ function getGarcomId(){
     } else{
         alert('O mínimo de mesas é 1!');
     }
-}
+} //Faz a entrada no app
 
 function createCartString(mesas){
     pedidos;
@@ -71,37 +70,50 @@ function createCartString(mesas){
         }
         pedidos.push(itens)
     }
-}
 
-function buy(produto, modificador){
-    if(quantidade[produto]==0 && modificador==-1){
-    } else{
-        quantidade[produto] += modificador;
-        document.getElementsByClassName('quantity')[produto].value = quantidade[produto];
-    }
-}
-
-
-function sendToCart(){
-    for (i=0; i<10; i++){
-        let quantidadeItens = document.getElementById('produto'+i);
-        if(quantidadeItens.value!=0){
-            pedidos[mesaAtual][i].quantidade += parseInt(quantidadeItens.value);
-        }
-    }
-}
-
-function cartModal(){
-    const cartModal = document.getElementById('cart-modal');
-    cartModal.style.display = 'flex';
     const cartConteiner = document.getElementById('cart-content');
     $.getJSON(api('Itens.json'), function(itens){
         for(i= 0; i<itens.length; i++){
             cartConteiner.innerHTML+=`
                 <p class="text-title"> `+itens[i].nome+` </p>
                 <span class="text-title"> R$`+itens[i].valor.toFixed(2)+` </span>
-                <input placeholder=`+pedidos[mesaAtual][i].quantidade+` class="test" disabled>
+                <input placeholder=`+pedidos[mesaAtual][i].quantidade+` class="cart-quantity" disabled>
             `;
         }
-    });
+    }); //Gera os elementos do carrinho
+} //Cria a string do carrinho (provisória)
+
+function buy(produto, modificador){
+    if(quantidade[produto]==0 && modificador==-1){
+    } else{
+        quantidade[produto] += modificador;
+        document.getElementsByClassName('cart-quantity')[produto].value = parseInt(document.getElementsByClassName('cart-quantity')[produto].value) + parseInt(quantidade[produto]);
+        document.getElementsByClassName('quantity')[produto].value = quantidade[produto];
+    }
+} //Adiciona ou remove a quantidade de produtos
+
+function sendToCart(){
+    for (i=0; i<pedidos[0].length; i++){
+        let quantidadeItens = document.getElementById('produto'+i);
+        
+        if(quantidadeItens.value!=0){
+            pedidos[mesaAtual][i].quantidade += parseInt(quantidadeItens.value);
+        }
+    }
+
+    for(i=0; i<pedidos[0].length; i++){
+        quantidade[i] = 0;
+        document.getElementsByClassName('quantity')[i].value = 0;
+    }
+
+    
+} //Envia os pedidos para o carrinho e zera o contador
+
+function openCartModal(){
+    const cartModal = document.getElementById('cart-modal');
+    cartModal.style.display = 'flex';
+} //Gera o modal do carrinho
+function closeCartModal(){
+    const cartModal = document.getElementById('cart-modal');
+    cartModal.style.display = 'none';
 }
