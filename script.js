@@ -42,12 +42,8 @@ window.onload = function(){
     });
 } //Gera a tela de login
 
-<<<<<<< HEAD
-function api(jsonFile) {
-=======
-function apiGitHub(jsonFile) {
+function apiGitHub(jsonFile){
     //Retorna o json através do Github, evitando conflitos com o CORS.
->>>>>>> 2f09274ad7030646e343b6fb78203ef903a005c7
     return 'https://raw.githubusercontent.com/YuriPorto90/restaurant-cart/main/dados/' + jsonFile;
 } //Retorna o json através do Github, evitando conflitos com o CORS.
 
