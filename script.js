@@ -3,7 +3,7 @@ const conteiner = document.querySelector('main');
 let pedidos = []; let i; let j;
 
 window.onload = function(){
-    $.getJSON(apiLocal('cardapio'), function(itens){
+    $.getJSON(api('Itens.json'), function(itens){
         itens.map((item)=>{
             conteiner.innerHTML+=`
             <div class="card">
@@ -21,8 +21,6 @@ window.onload = function(){
             `;
         });
 
-        console.log(apiLocal('cardapio'));
-
         quantidade = [];
         for (i = 0; i <itens.length; i++) {
             quantidade.push(0)
@@ -30,9 +28,9 @@ window.onload = function(){
         totalItens = itens.length;
     });
 
-    modal.style.display = 'flex';
+    modal.style.display = 'flex'; 
 
-    $.getJSON(apiGitHub('Garcons.json'), function(garcons){
+    $.getJSON(api('Garcons.json'), function(garcons){
         const garconSelect = document.getElementById('garcom-list');
         garcons.map((garcom)=>{
             garconSelect.innerHTML+=`
@@ -40,8 +38,14 @@ window.onload = function(){
             `;
         })
     });
-} //Gera a tela de login
+}
 
+function api(jsonFile) {
+    //Retorna o json através do Github, evitando conflitos com o CORS.
+    return 'https://raw.githubusercontent.com/YuriPorto90/restaurant-cart/main/Test-data/' + jsonFile;
+}
+
+/*
 function apiGitHub(jsonFile){
     //Retorna o json através do Github, evitando conflitos com o CORS.
     return 'https://raw.githubusercontent.com/YuriPorto90/restaurant-cart/main/dados/' + jsonFile;
@@ -51,6 +55,7 @@ function apiLocal(rota = null) {
     //Retorna o json através do servidor local que pega os dados do banco Mongo.
     return 'localhost:3000/' + rota;
 }
+*/
 
 const selector = document.getElementById('garcom-list');
 selector.addEventListener('change', ()=>{
@@ -80,12 +85,13 @@ function createCartString(mesas){
     }
 
     const cartConteiner = document.getElementById('cart-content');
-    $.getJSON(apiGitHub('Itens.json'), function(itens){
+    $.getJSON(api('Itens.json'), function(itens){
         for(i= 0; i<itens.length; i++){
             cartConteiner.innerHTML+=`
                 <p class="text-title"> `+itens[i].nome+` </p>
                 <span class="text-title"> R$`+itens[i].valor.toFixed(2)+` </span>
                 <input placeholder=`+pedidos[mesaAtual][i].quantidade+` class="cart-quantity" disabled>
+                <button class="COLOCAR CLASSE" onclick="removeFromCart(`+i+`, -1)">-</button>
             `;
         }
     }); //Gera os elementos do carrinho
@@ -95,7 +101,6 @@ function buy(produto, modificador){
     if(quantidade[produto]==0 && modificador==-1){
     } else{
         quantidade[produto] += modificador;
-        document.getElementsByClassName('cart-quantity')[produto].value = parseInt(document.getElementsByClassName('cart-quantity')[produto].value) + parseInt(quantidade[produto]);
         document.getElementsByClassName('quantity')[produto].value = quantidade[produto];
     }
 } //Adiciona ou remove a quantidade de produtos
@@ -105,7 +110,8 @@ function sendToCart(){
         let quantidadeItens = document.getElementById('produto'+i);
         
         if(quantidadeItens.value!=0){
-            pedidos[mesaAtual][i].quantidade += parseInt(quantidadeItens.value);
+            pedidos[mesaAtual][i].quantidade = parseInt(document.getElementsByClassName('quantity')[i].value) + parseInt(pedidos[mesaAtual][i].quantidade);
+            document.getElementsByClassName('cart-quantity')[i].value = pedidos[mesaAtual][i].quantidade;
         }
     }
 
@@ -116,6 +122,13 @@ function sendToCart(){
 
     
 } //Envia os pedidos para o carrinho e zera o contador
+
+function removeFromCart(id, value){
+    if(document.getElementsByClassName('cart-quantity')[id].value > 0){
+        pedidos[mesaAtual][id].quantidade += value;
+        document.getElementsByClassName('cart-quantity')[id].value = pedidos[mesaAtual][id].quantidade;
+    }
+}
 
 function openCartModal(){
     const cartModal = document.getElementById('cart-modal');
